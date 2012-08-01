@@ -1,0 +1,50 @@
+NAME
+    Perinci::Access::Simple::Client - Riap::Simple client
+
+VERSION
+    version 0.04
+
+SYNOPSIS
+     use Perinci::Access::Simple::Client;
+     my $pa = Perinci::Access::Simple::Client->new;
+
+     my $res;
+     $res = $pa->request(call => 'riap+tcp://localhost:5678/Foo/Bar/func',
+                         {args => {a1=>1, a2=>2}});
+
+DESCRIPTION
+    This class implements Riap::Simple client. It supports the 'riap+tcp',
+    'riap+unix', and 'riap+pipe' schemes.
+
+    This class uses Log::Any for logging.
+
+METHODS
+  PKG->new(%attrs) => OBJ
+    Instantiate object. Known attributes:
+
+    *   retries => INT (default 2)
+
+        Number of retries to do on network failure. Setting it to 0 will
+        disable retries.
+
+    *   retry_delay => INT (default 3)
+
+        Number of seconds to wait between retries.
+
+  $pa->request($action => $server_url, \%extra) => $res
+    Send Riap request to $server_url.
+
+SEE ALSO
+    Perinci::Access::Simple::Server
+
+    Riap::Simple, Riap, Rinci
+
+AUTHOR
+    Steven Haryanto <stevenharyanto@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2012 by Steven Haryanto.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+

@@ -1,0 +1,25 @@
+Revision history for Perinci-Access-Simple-Client
+
+0.04     2012-08-01 (SHARYANTO)
+
+         - Rename module from Perinci::Access::TCP::Client to
+           Perinci::Access::Simple::Client, following the spec name change
+           (Riap::TCP -> Riap::Simple). Now follows Riap 1.1.17.
+
+         - Support accessing server via pipe (riap+pipe scheme).
+
+
+0.03     2012-07-25 (SHARYANTO)
+
+         Fix: don't mix buffered and unbuffered I/O, use buffered (getline() is
+         convenient)
+
+
+0.02     2012-07-19 (SHARYANTO)
+
+         Support single-line request (Riap 1.1.15).
+
+
+0.01     2012-07-19 (SHARYANTO)
+
+         First release.
