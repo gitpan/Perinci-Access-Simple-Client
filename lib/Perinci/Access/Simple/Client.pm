@@ -13,7 +13,7 @@ use URI::Escape;
 
 use parent qw(Perinci::Access::Base);
 
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 my @logging_methods = Log::Any->logging_methods();
 
@@ -35,6 +35,7 @@ sub _init {
 sub _delete_cache {
     my ($self, $wanted) = @_;
     my $conns = $self->{_conns};
+    return unless $conns;
     for my $k ($wanted ? ($wanted) : (keys %$conns)) {
         if ($k =~ /^pipe:/) {
             waitpid($conns->{$k}{pid}, WNOHANG);
@@ -255,7 +256,7 @@ Perinci::Access::Simple::Client - Riap::Simple client
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

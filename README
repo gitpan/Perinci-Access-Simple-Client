@@ -2,7 +2,7 @@ NAME
     Perinci::Access::Simple::Client - Riap::Simple client
 
 VERSION
-    version 0.05
+    version 0.06
 
 SYNOPSIS
      use Perinci::Access::Simple::Client;
