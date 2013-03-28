@@ -13,7 +13,7 @@ use URI::Escape;
 
 use parent qw(Perinci::Access::Base);
 
-our $VERSION = '0.08'; # VERSION
+our $VERSION = '0.09'; # VERSION
 
 my @logging_methods = Log::Any->logging_methods();
 
@@ -259,7 +259,7 @@ Perinci::Access::Simple::Client - Riap::Simple client
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -288,6 +288,7 @@ version 0.08
  # accessing a remote program via SSH client
  use URI::Escape;
  $res = $pa->request(call => 'riap+pipe:ssh/-T/-i/' .
+                             uri_escape('user@host') .
                              uri_escape('/path/to/program') .
                              '/'.uri_escape('first arg') .
                              '/'.uri_escape('second arg') .
