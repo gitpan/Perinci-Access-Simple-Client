@@ -26,4 +26,4 @@ requires:
 resources:
   homepage: http://metacpan.org/release/Perinci-Access-Simple-Client
   repository: http://github.com/sharyanto/perl-Perinci-Access-Simple-Client
-version: 0.09
+version: 0.10

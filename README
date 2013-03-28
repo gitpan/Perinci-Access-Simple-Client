@@ -2,7 +2,7 @@ NAME
     Perinci::Access::Simple::Client - Riap::Simple client
 
 VERSION
-    version 0.09
+    version 0.10
 
 SYNOPSIS
      use Perinci::Access::Simple::Client;
@@ -29,9 +29,9 @@ SYNOPSIS
 
      # accessing a remote program via SSH client
      use URI::Escape;
-     $res = $pa->request(call => 'riap+pipe:ssh/-T/-i/' .
+     $res = $pa->request(call => 'riap+pipe:ssh/-T/' .
                                  uri_escape('user@host') .
-                                 uri_escape('/path/to/program') .
+                                 '/'.uri_escape('/path/to/program') .
                                  '/'.uri_escape('first arg') .
                                  '/'.uri_escape('second arg') .
                                  '//Foo/Bar/func',
