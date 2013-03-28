@@ -7,8 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "Module::Build" => "0.3601",
-    "Test::More" => "0.96"
+    "Module::Build" => "0.3601"
   },
   "configure_requires" => {
     "Module::Build" => "0.3601"
@@ -18,14 +17,16 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Perinci-Access-Simple-Client",
-  "dist_version" => "0.07",
+  "dist_version" => "0.08",
   "license" => "perl",
   "module_name" => "Perinci::Access::Simple::Client",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
+    "JSON" => 0,
+    "Log::Any" => 0,
     "Perinci::Access::Base" => "0.19",
-    "Riap" => "1.1.17",
+    "Riap" => "v1.1.17",
     "String::ShellQuote" => 0,
     "Tie::Cache" => 0,
     "URI" => 0,

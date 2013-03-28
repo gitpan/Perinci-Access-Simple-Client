@@ -1,6 +1,6 @@
 package Perinci::Access::Simple::Client;
 
-use 5.010;
+use 5.010001;
 use strict;
 use warnings;
 use Log::Any '$log';
@@ -13,7 +13,7 @@ use URI::Escape;
 
 use parent qw(Perinci::Access::Base);
 
-our $VERSION = '0.07'; # VERSION
+our $VERSION = '0.08'; # VERSION
 
 my @logging_methods = Log::Any->logging_methods();
 
@@ -105,6 +105,8 @@ sub request {
                     "riap+pipe:/path/to/prog//arg1/arg2//Foo/Bar/func"];
         }
     }
+    $log->tracef("Parsed URI, scheme=%s, host=%s, port=%s, path=%s, args=%s, ".
+                     "ceuri=%s", $scheme, $host, $port, $path, $args, $uri);
     $req->{uri} = $uri;
 
     state $json = JSON->new->allow_nonref;
@@ -257,7 +259,7 @@ Perinci::Access::Simple::Client - Riap::Simple client
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
@@ -265,13 +267,40 @@ version 0.07
  my $pa = Perinci::Access::Simple::Client->new;
 
  my $res;
+
+ # to request server over TCP
  $res = $pa->request(call => 'riap+tcp://localhost:5678/Foo/Bar/func',
+                     {args => {a1=>1, a2=>2}});
+
+ # to request server over Unix socket (separate Unix socket path and Riap
+ # request key 'uri' with an extra slash /)
+ $res = $pa->request(call => 'riap+unix:/var/run/api.sock//Foo/Bar/func',
+                     {args => {a1=>1, a2=>2}});
+
+ # to request "server" (program) over pipe (separate program path and first
+ # argument with an extra slash /, then separate each program argument with
+ # slashes, finally separate last program argument with Riap request key 'uri'
+ # with an extra slash /). Arguments are URL-escaped so they can contain slashes
+ # if needed (in the encoded form of %2F).
+ $res = $pa->request(call => 'riap+pipe:/path/to/prog//arg1/arg2//Foo/Bar/func',
+                     {args => {a1=>1, a2=>2}});
+
+ # accessing a remote program via SSH client
+ use URI::Escape;
+ $res = $pa->request(call => 'riap+pipe:ssh/-T/-i/' .
+                             uri_escape('/path/to/program') .
+                             '/'.uri_escape('first arg') .
+                             '/'.uri_escape('second arg') .
+                             '//Foo/Bar/func',
                      {args => {a1=>1, a2=>2}});
 
 =head1 DESCRIPTION
 
 This class implements L<Riap::Simple> client. It supports the 'riap+tcp',
-'riap+unix', and 'riap+pipe' schemes.
+'riap+unix', and 'riap+pipe' schemes for a variety of methods to access the
+server: either via TCP (where the server can be on a remote computer), Unix
+socket, or a program (where the program can also be on a remote computer, e.g.
+accessed via ssh).
 
 This class uses L<Log::Any> for logging.
 
@@ -310,7 +339,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
