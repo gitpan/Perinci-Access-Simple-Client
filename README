@@ -2,7 +2,7 @@ NAME
     Perinci::Access::Simple::Client - Riap::Simple client
 
 VERSION
-    version 0.11
+    version 0.12
 
 SYNOPSIS
      use Perinci::Access::Simple::Client;
@@ -27,20 +27,25 @@ SYNOPSIS
      $res = $pa->request(call => 'riap+pipe:/path/to/prog//arg1/arg2//Foo/Bar/func',
                          {args => {a1=>1, a2=>2}});
 
-     # accessing a remote program via SSH client
+     # an example for riap+pipe, accessing a remote program via SSH client
      use URI::Escape;
+     my @cmd = ('ssh', '-T', 'user@host', '/path/to/program', 'first arg', '2nd');
+     my $uri = "/Foo/Bar/func";
      $res = $pa->request(call => 'riap+pipe:' .
-                                 # program
-                                 'ssh' . # program
-                                 # args
-                                 '//-T' .
-                                 '/'.uri_escape('user@host') .
-                                 '/'.uri_escape('/path/to/program') .
-                                 '/'.uri_escape('first arg') .
-                                 '/'.uri_escape('second arg') .
-                                 # Riap request uri
-                                 '//Foo/Bar/func',
+                                 uri_escape($cmd[0]) . '//' .
+                                 join('/', map { uri_escape($_) } @cmd[1..@cmd-1]) . '/' .
+                                 $uri,
                          {args => {a1=>1, a2=>2}});
+
+     # helper for riap+tcp
+     $res = $pa->request_tcp(call => [$host, $port], \%extra);
+
+     # helper for riap+unix
+     $res = $pa->request_unix(call => $sockpath, \%extra);
+
+     # helper for riap+pipe
+     my @cmd = ('/path/to/program', 'first arg', '2nd');
+     $res = $pa->request_pipe(call => \@cmd, \%extra);
 
 DESCRIPTION
     This class implements Riap::Simple client. It supports the 'riap+tcp',
@@ -66,6 +71,34 @@ METHODS
 
   $pa->request($action => $server_url, \%extra) => $res
     Send Riap request to $server_url.
+
+  $pa->request_tcp($action => [$host, $port], \%extra) => $res
+    Helper/wrapper for request(), it forms $server_url using:
+
+     "riap+tcp://$host:$port"
+
+    You need to specify Riap request key 'uri' in %extra.
+
+  $pa->request_unix($action => $sockpath, \%extra) => $res
+    Helper/wrapper for request(), it forms $server_url using:
+
+     "riap+unix:" . uri_escape($sockpath)
+
+    You need to specify Riap request key 'uri' in %extra.
+
+  $pa->request_pipe($action => \@cmd, \%extra) => $res
+    Helper/wrapper for request(), it forms $server_url using:
+
+     "riap+pipe:" . uri_escape($cmd[0]) . "//" .
+     join("/", map {uri_escape($_)} @cmd[1..@cmd-1])
+
+    You need to specify Riap request key 'uri' in %extra.
+
+FAQ
+  When I use riap+pipe, is the program executed for each Riap request?
+    No, this module does some caching, so if you call the same program (with
+    the same arguments) 10 times, the same program will be used and it will
+    receive 10 Riap requests using the Riap::Simple protocol.
 
 SEE ALSO
     Perinci::Access::Simple::Server
