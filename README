@@ -2,13 +2,15 @@ NAME
     Perinci::Access::Simple::Client - Riap::Simple client
 
 VERSION
-    version 0.12
+    version 0.13
 
 SYNOPSIS
      use Perinci::Access::Simple::Client;
      my $pa = Perinci::Access::Simple::Client->new;
 
      my $res;
+
+     ## performing Riap requests
 
      # to request server over TCP
      $res = $pa->request(call => 'riap+tcp://localhost:5678/Foo/Bar/func',
@@ -46,6 +48,12 @@ SYNOPSIS
      # helper for riap+pipe
      my @cmd = ('/path/to/program', 'first arg', '2nd');
      $res = $pa->request_pipe(call => \@cmd, \%extra);
+
+     ## parsing URL
+
+     $res = $pa->parse_url("riap+unix:/var/run/apid.sock//Foo/bar");   # -> {proto=>"riap+unix", path=>"/Foo/bar", unix_sock_path=>"/var/run/apid.sock"}
+     $res = $pa->parse_url("riap+tcp://localhost:5000/Foo/bar");       # -> {proto=>"riap+tcp" , path=>"/Foo/bar", host=>"localhost", port=>5000}
+     $res = $pa->parse_url("riap+pipe:/path/to/prog//a1/a2//Foo/bar"); # -> {proto=>"riap+pipe", path=>"/Foo/bar", prog_path=>"/path/to/prog", args=>["a1", "a2"]}
 
 DESCRIPTION
     This class implements Riap::Simple client. It supports the 'riap+tcp',
@@ -94,6 +102,7 @@ METHODS
 
     You need to specify Riap request key 'uri' in %extra.
 
+  $pa->parse_url($server_url) => HASH
 FAQ
   When I use riap+pipe, is the program executed for each Riap request?
     No, this module does some caching, so if you call the same program (with
