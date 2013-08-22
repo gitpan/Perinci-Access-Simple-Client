@@ -4,7 +4,7 @@
       "Steven Haryanto <stevenharyanto@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140",
+   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "perl_5"
    ],
@@ -36,7 +36,7 @@
          "requires" : {
             "JSON" : "0",
             "Log::Any" : "0",
-            "Perinci::Access::Base" : "0.19",
+            "Perinci::Access::Base" : "0.29",
             "Riap" : "v1.1.17",
             "String::ShellQuote" : "0",
             "Tie::Cache" : "0",
@@ -47,9 +47,7 @@
       },
       "test" : {
          "requires" : {
-            "Capture::Tiny" : "0",
-            "Test::More" : "0.98",
-            "blib" : "0"
+            "Test::More" : "0.98"
          }
       }
    },
@@ -60,6 +58,6 @@
          "url" : "http://github.com/sharyanto/perl-Perinci-Access-Simple-Client"
       }
    },
-   "version" : "0.13"
+   "version" : "0.14"
 }
 

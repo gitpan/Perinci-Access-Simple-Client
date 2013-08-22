@@ -13,12 +13,14 @@ use URI::Escape;
 
 use parent qw(Perinci::Access::Base);
 
-our $VERSION = '0.13'; # VERSION
+our $VERSION = '0.14'; # VERSION
 
 my @logging_methods = Log::Any->logging_methods();
 
-sub _init {
-    my ($self) = @_;
+sub new {
+    my $class = shift;
+
+    my $self = $class->SUPER::new(@_);
 
     # attributes
     $self->{retries}         //= 2;
@@ -30,7 +32,12 @@ sub _init {
     # chld_out=>..., chld_in=>...}
     tie my(%conns), 'Tie::Cache', $self->{conn_cache_size};
     $self->{_conns} = \%conns;
+
+    $self;
 }
+
+# for older Perinci::Access::Base 0.28-, to remove later
+sub _init {}
 
 sub _delete_cache {
     my ($self, $wanted) = @_;
@@ -340,7 +347,7 @@ Perinci::Access::Simple::Client - Riap::Simple client
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
