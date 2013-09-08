@@ -3,12 +3,14 @@ abstract: 'Riap::Simple client'
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
+  Capture::Tiny: 0
   Module::Build: 0.3601
   Test::More: 0.98
+  blib: 0
 configure_requires:
   Module::Build: 0.3601
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.131560'
+generated_by: 'Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -21,10 +23,10 @@ requires:
   Riap: v1.1.17
   String::ShellQuote: 0
   Tie::Cache: 0
-  URI: 0
   URI::Escape: 0
+  URI::Split: 0
   perl: 5.010001
 resources:
   homepage: http://metacpan.org/release/Perinci-Access-Simple-Client
   repository: http://github.com/sharyanto/perl-Perinci-Access-Simple-Client
-version: 0.14
+version: 0.15

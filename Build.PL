@@ -17,7 +17,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Perinci-Access-Simple-Client",
-  "dist_version" => "0.14",
+  "dist_version" => "0.15",
   "license" => "perl",
   "module_name" => "Perinci::Access::Simple::Client",
   "recommends" => {},
@@ -29,13 +29,15 @@ my %module_build_args = (
     "Riap" => "v1.1.17",
     "String::ShellQuote" => 0,
     "Tie::Cache" => 0,
-    "URI" => 0,
     "URI::Escape" => 0,
+    "URI::Split" => 0,
     "perl" => "5.010001"
   },
   "script_files" => [],
   "test_requires" => {
-    "Test::More" => "0.98"
+    "Capture::Tiny" => 0,
+    "Test::More" => "0.98",
+    "blib" => 0
   }
 );
 
