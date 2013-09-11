@@ -13,7 +13,7 @@ use URI::Escape;
 
 use parent qw(Perinci::Access::Base);
 
-our $VERSION = '0.15'; # VERSION
+our $VERSION = '0.16'; # VERSION
 
 my @logging_methods = Log::Any->logging_methods();
 
@@ -347,7 +347,7 @@ Perinci::Access::Simple::Client - Riap::Simple client
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 
