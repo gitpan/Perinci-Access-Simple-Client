@@ -2,7 +2,9 @@ NAME
     Perinci::Access::Simple::Client - Riap::Simple client
 
 VERSION
-    version 0.16
+    This document describes version 0.17 of Perinci::Access::Simple::Client
+    (from Perl distribution Perinci-Access-Simple-Client), released on
+    2014-10-23.
 
 SYNOPSIS
      use Perinci::Access::Simple::Client;
@@ -114,11 +116,27 @@ SEE ALSO
 
     Riap::Simple, Riap, Rinci
 
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/Perinci-Access-Simple-Client>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/perlancar/perl-Perinci-Access-Simple-Client>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Access-Simple
+    -Client>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
 AUTHOR
-    Steven Haryanto <stevenharyanto@gmail.com>
+    perlancar <perlancar@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2013 by Steven Haryanto.
+    This software is copyright (c) 2014 by perlancar@cpan.org.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

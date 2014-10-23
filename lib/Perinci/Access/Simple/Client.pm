@@ -1,19 +1,21 @@
 package Perinci::Access::Simple::Client;
 
+our $DATE = '2014-10-23'; # DATE
+our $VERSION = '0.17'; # VERSION
+
 use 5.010001;
 use strict;
 use warnings;
 use Log::Any '$log';
 
 use Cwd qw(abs_path);
+use Perinci::AccessUtil qw(strip_riap_stuffs_from_res);
 use POSIX qw(:sys_wait_h);
 use Tie::Cache;
 use URI::Split qw(uri_split);
 use URI::Escape;
 
 use parent qw(Perinci::Access::Base);
-
-our $VERSION = '0.16'; # VERSION
 
 my @logging_methods = Log::Any->logging_methods();
 
@@ -230,6 +232,7 @@ sub _parse_or_request {
                 require String::ShellQuote;
                 my $cmd = $path . (@$args ? " " . join(" ", map {
                     String::ShellQuote::shell_quote($_) } @$args) : "");
+                $log->tracef("executing cmd: %s", $cmd);
 
                 # using shell
                 #my $pid = IPC::Open2::open2($in, $out, $cmd, @$args);
@@ -282,6 +285,7 @@ sub _parse_or_request {
             $self->_delete_cache($cache_key);
             return [500, "Invalid JSON response from server: $e"];
         }
+        strip_riap_stuffs_from_res($res);
         return $res;
 
       RETRY:
@@ -341,13 +345,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Perinci::Access::Simple::Client - Riap::Simple client
 
 =head1 VERSION
 
-version 0.16
+This document describes version 0.17 of Perinci::Access::Simple::Client (from Perl distribution Perinci-Access-Simple-Client), released on 2014-10-23.
 
 =head1 SYNOPSIS
 
@@ -475,13 +481,29 @@ L<Perinci::Access::Simple::Server>
 
 L<Riap::Simple>, L<Riap>, L<Rinci>
 
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Access-Simple-Client>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/perlancar/perl-Perinci-Access-Simple-Client>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Access-Simple-Client>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
