@@ -1,7 +1,7 @@
 package Perinci::Access::Simple::Client;
 
-our $DATE = '2014-10-23'; # DATE
-our $VERSION = '0.17'; # VERSION
+our $DATE = '2014-10-24'; # DATE
+our $VERSION = '0.18'; # VERSION
 
 use 5.010001;
 use strict;
@@ -144,7 +144,7 @@ sub _parse_or_request {
     my $res;
 
     unless ($which eq 'parse0') {
-        $req = { action=>$action, %{$extra // {}} };
+        $req = { v=>$self->{riap_version}, action=>$action, %{$extra // {}} };
         $uri ||= $req->{uri}; $req->{uri} //= $uri;
         $res = $self->check_request($req);
         return $res if $res;
@@ -353,7 +353,7 @@ Perinci::Access::Simple::Client - Riap::Simple client
 
 =head1 VERSION
 
-This document describes version 0.17 of Perinci::Access::Simple::Client (from Perl distribution Perinci-Access-Simple-Client), released on 2014-10-23.
+This document describes version 0.18 of Perinci::Access::Simple::Client (from Perl distribution Perinci-Access-Simple-Client), released on 2014-10-24.
 
 =head1 SYNOPSIS
 

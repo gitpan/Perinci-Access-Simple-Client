@@ -22,7 +22,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "JSON" => 0,
     "Log::Any" => 0,
-    "Perinci::Access::Base" => "0.31",
+    "Perinci::Access::Base" => "0.32",
     "Perinci::AccessUtil" => "0.04",
     "Riap" => "v1.2.0",
     "String::ShellQuote" => 0,
@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "0.17",
+  "VERSION" => "0.18",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -49,7 +49,7 @@ my %FallbackPrereqs = (
   "IPC::Open3" => 0,
   "JSON" => 0,
   "Log::Any" => 0,
-  "Perinci::Access::Base" => "0.31",
+  "Perinci::Access::Base" => "0.32",
   "Perinci::AccessUtil" => "0.04",
   "Riap" => "v1.2.0",
   "String::ShellQuote" => 0,
